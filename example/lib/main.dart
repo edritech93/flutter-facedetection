@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:facedetection/facedetection.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +18,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
+  final ImagePicker _picker = ImagePicker();
 
   @override
   void initState() {
@@ -46,6 +48,13 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void _onPressAdd() async {
+    final _xFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (_xFile != null) {
+      print("_xFile => ${_xFile.path}");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -56,6 +65,7 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: Text('Running on: $_platformVersion\n'),
         ),
+        floatingActionButton: FloatingActionButton(child: Icon(Icons.add), onPressed: () => _onPressAdd(),),
       ),
     );
   }
