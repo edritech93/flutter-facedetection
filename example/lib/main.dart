@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -17,7 +20,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  String? imagePath;
   final ImagePicker _picker = ImagePicker();
 
   @override
@@ -29,6 +32,9 @@ class _MyAppState extends State<MyApp> {
     final _xFile = await _picker.pickImage(source: ImageSource.gallery);
     if (_xFile != null) {
       print("_xFile => ${_xFile.path}");
+      setState(() {
+        imagePath = _xFile.path;
+      });
       final faces = await Facedetection.getFaces(imagePath: _xFile.path);
       print("_onPressAdd faces => ${faces.length}");
     }
@@ -41,11 +47,11 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: Container(
+          child: imagePath != null ? Image.file(File(imagePath!)) : null,
         ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: () => _onPressAdd(),
         ),
       ),

@@ -2,7 +2,7 @@ PODS:
   - facedetection (0.0.1):
     - Flutter
     - GoogleMLKit
-    - GoogleMLKit/FaceDetection
+    - GoogleMLKit/FaceDetection (~> 2.6.0)
   - Flutter (1.0.0)
   - GoogleDataTransport (9.1.2):
     - GoogleUtilities/Environment (~> 7.2)
@@ -99,7 +99,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/image_picker_ios/ios"
 
 SPEC CHECKSUMS:
-  facedetection: adc0454f2e0f529838665fe3fc53e06ce2830474
+  facedetection: 4d533cf9621e3c12536cf379bfef688f2c4c34ab
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleMLKit: 755661c46990a85e42278015f26400286d98ad95
@@ -116,6 +116,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 99b6f43f9e1044bd87a95a60beff28c2c44ddb72
   Protobuf: b60ec2f51ad74765f44d0c09d2e0579d7de21745
 
-PODFILE CHECKSUM: 65abdf23142e339a7727ab6f365cba15b1c24e46
+PODFILE CHECKSUM: fe0e1ee7f3d1f7d00b11b474b62dd62134535aea
 
 COCOAPODS: 1.11.2
