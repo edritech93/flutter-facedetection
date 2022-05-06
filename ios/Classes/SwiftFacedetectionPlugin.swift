@@ -22,23 +22,23 @@ public class SwiftFacedetectionPlugin: NSObject, FlutterPlugin {
         }
         handleDetection(imagePath: imagePath, result: result);
     }
-}
-
-private func handleDetection(imagePath: String, result: @escaping FlutterResult) {
-    let image =  UIImage(contentsOfFile: imagePath)
-    let options = FaceDetectorOptions()
-    options.performanceMode = .fast
-    options.classificationMode = .none
     
-    let faceDetector = FaceDetector.faceDetector(options: options)
-    let visionImage = VisionImage(image: image!)
-    visionImage.orientation = image!.imageOrientation
-    
-    faceDetector.process(visionImage) { faces, error in
-        //        guard error == nil, let faces = faces, !faces.isEmpty else {
-        //            return
-        //        }
-        print("faces => \(faces?.count)")
-        result(faces)
+    private func handleDetection(imagePath: String, result: @escaping FlutterResult) {
+        let image =  UIImage(contentsOfFile: imagePath)
+        let visionImage = VisionImage(image: image!)
+        visionImage.orientation = image?.imageOrientation ?? .up
+        
+        let options = FaceDetectorOptions()
+        options.performanceMode = .fast
+        options.classificationMode = .none
+        options.contourMode = .none
+        options.landmarkMode = .none
+        
+        let faceDetector = FaceDetector.faceDetector(options: options)
+        
+        faceDetector.process(visionImage) { faces, error in
+            print("faces => \(String(describing: faces?.count))")
+            result(faces)
+        }
     }
 }
